@@ -86,7 +86,7 @@ echo "Solution is deployed and scaled. Hit any key to test solution by running $
 read answer
 
 echo
-./start_test_from_script_params.sh $cluster_namespace $test_jmx
+cd $HOME/${git_path}/kubernetes/bin  && ./start_test_from_script_params.sh $cluster_namespace $test_jmx
 
 printf "$t"
 echo "Congratulations!! It works!"
