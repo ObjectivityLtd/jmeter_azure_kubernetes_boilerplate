@@ -33,9 +33,11 @@ echo "Jmeter args $jmeter_args"
 
 kubectl exec -ti -n $tenant $master_pod -- rm -Rf "$tmp"
 kubectl exec -ti -n $tenant $master_pod -- mkdir -p "$tmp/$report_dir"
-kubectl exec -ti -n $tenant $master_pod -- /bin/bash /load_test "$test_name -Jwebdriver.sampleresult_class=com.googlecode.jmeter.plugins.webdriver.sampler.SampleResultWithSubs -l $tmp/results.csv -e -Gthreads=$threads $jmeter_args -o $tmp/$report_dir"
-kubectl cp "$tenant/$master_pod:$tmp/$report_dir" "$local_report_dir"
+kubectl exec -ti -n $tenant $master_pod -- /bin/bash /load_test "$test_name -Gwebdriver.sampleresult_class=com.googlecode.jmeter.plugins.webdriver.sampler.SampleResultWithSubs -l $tmp/results.csv -e -Gthreads=$threads $jmeter_args -o $tmp/$report_dir"
+kubectl cp "$tenant/$master_pod:$tmp/$report_dir" "$local_report_dir/"
 kubectl cp "$tenant/$master_pod:$tmp/results.csv" "$working_dir/../tmp/"
 kubectl cp "$tenant/$master_pod:/test/jmeter.log" "$working_dir/../tmp/"
 
-#enter master pod - kubectl exec -ti -n jmeter jmeter-master-5757fb465-9w4j7 -- bash
+#enter master pod
+# kubectl exec -ti -n jmeter $(kubectl get po -n jmeter | grep jmeter-master | awk '{print $1}') -- bash
+# kubectl exec -ti -n jmeter $(kubectl get po -n jmeter | grep jmeter-slave | awk '{print $1}'  | head -n1) -- bash
