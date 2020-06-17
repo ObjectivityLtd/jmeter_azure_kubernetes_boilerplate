@@ -17,7 +17,7 @@ test_jmx="selenium_test_chrome_headless.jmx"
 #devops org details
 devops_org=gstarczewski
 devops_project=jmeter
-devops_service_connection_name=k8k
+devops_service_connection_name=k8c
 devops_user=gstarczewski
 git_path=jmeter_azure_kubernetes_boilerplate
 
@@ -43,7 +43,7 @@ fi
 
 # Delete service connection if exists
 echo "Deleting k8 service connection $devops_service_connection_name if exists"
-#source bin/delete_service_connection.sh $devops_org $devops_project $devops_user $pat $devops_service_connection_name
+source bin/delete_service_connection.sh $devops_org $devops_project $devops_user $pat $devops_service_connection_name
 
 # Delete entire resource group if exist:
 echo "Deleting group $group_name if exists"
@@ -64,7 +64,7 @@ kubectl get nodes
 
 # Create service connection in devops org
 echo "Creating service connection"
-#source bin/create_service_connection.sh $devops_org $devops_project $devops_user $pat $devops_service_connection_name $cluster_name $group_name
+source bin/create_service_connection.sh $devops_org $devops_project $devops_user $pat $devops_service_connection_name $cluster_name $group_name
 
 # Ask if we continue
 printf "$t"
