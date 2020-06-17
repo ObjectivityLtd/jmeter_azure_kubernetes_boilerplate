@@ -77,7 +77,7 @@ echo "Hit any key to deploy solution to namespace $cluster_namespace"
 cd $HOME/${git_path}/kubernetes/bin && chmod +x *.sh && ./jmeter_cluster_create.sh "$cluster_namespace"
 
 # Wait for all pods to get deployed
-cd $HOME/${git_path}/pipelines/azure && source bin/wait_for_pods.sh jmeter 1 5 influxdb-jmeter jmeter-master jmeter-grafana
+cd $HOME/${git_path}/pipelines/azure && source bin/wait_for_pods.sh jmeter 1 5 jmeter-master
 
 # Create grafana dashboards
 echo "Creating grafana dashboards"
