@@ -2,7 +2,7 @@
 #edit CONFIG part of this file in your repo, commit. You will need PAT from your devop org. Makeit available as ENV variable $pat
 #echo "export pat=your_devops_org_pat" > .bash_profile && source .bash_profile
 #execute this in Azure CLI:
-#cd ~ && rm -Rf jmeter-kubernetes && git clone https://github.com/ObjectivityLtd/jmeter-kubernetes && cd jmeter-kubernetes/pipelines/azure && chmod +x *.sh && ./azure-pipelines.1.azure.agent.kubernetes.sh jmeter-group2
+#cd ~ && rm -Rf ${git_path} && git clone https://github.com/ObjectivityLtd/${git_path} && cd ${git_path}/pipelines/azure && chmod +x *.sh && ./azure-pipelines.1.azure.agent.kubernetes.sh jmeter-group2
 
 #CONFIG START
 #k8 cluster params
@@ -19,6 +19,8 @@ devops_org=gstarczewski
 devops_project=jmeter
 devops_service_connection_name=k8k
 devops_user=gstarczewski
+git_path=jmeter_azure_kubernetes_boilerplate
+
 #CONFIG END
 
 t="\n########################################################################################################\n"
@@ -72,14 +74,14 @@ echo
 
 # Deploy services
 echo "Hit any key to deploy solution to namespace $cluster_namespace"
-cd $HOME/jmeter-kubernetes/kubernetes/bin && chmod +x *.sh && ./jmeter_cluster_create.sh "$cluster_namespace"
+cd $HOME/${git_path}/kubernetes/bin && chmod +x *.sh && ./jmeter_cluster_create.sh "$cluster_namespace"
 
 # Wait for all pods to get deployed
-cd $HOME/jmeter-kubernetes/pipelines/azure && source bin/wait_for_pods.sh jmeter 1 5 influxdb-jmeter jmeter-master jmeter-grafana
+cd $HOME/${git_path}/pipelines/azure && source bin/wait_for_pods.sh jmeter 1 5 influxdb-jmeter jmeter-master jmeter-grafana
 
 # Create grafana dashboards
 echo "Creating grafana dashboards"
-cd $HOME/jmeter-kubernetes/kubernetes/bin && ./dashboard.sh
+cd $HOME/${git_path}/kubernetes/bin && ./dashboard.sh
 
 # Test
 printf "$t"
@@ -93,6 +95,6 @@ printf "$t"
 echo "Congratulations!! It works!"
 printf "$t"
 printf "\n\t1. Go to https://dev.azure.com/${devops_org}/${devops_project}/_build to configure pipeline"
-printf "\n\t2  Use this pipeline for start: jmeter-kubernetes/pipelines/azure/azure-pipelines.1.azure.agent.kubernetes.yaml"
+printf "\n\t2  Use this pipeline for start: ${git_path}/pipelines/azure/azure-pipelines.1.azure.agent.kubernetes.yaml"
 printf "\n\t3  You service connection is $devops_service_connection_name"
 printf  "\n\t4  Grafana is at: http://" && echo $(kubectl get -n $cluster_namespace all | grep service/jmeter-grafana | awk '{print $4}')
