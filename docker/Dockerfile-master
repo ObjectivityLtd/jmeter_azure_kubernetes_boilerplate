@@ -1,0 +1,4 @@
+FROM gabrielstar/jmeter-base:latest
+MAINTAINER Gabriel Starczewski
+
+EXPOSE 60000
