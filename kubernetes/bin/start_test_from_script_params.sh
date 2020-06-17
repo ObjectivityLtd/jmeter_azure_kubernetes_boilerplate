@@ -8,7 +8,7 @@ working_dir="$(pwd)"
 #Get namesapce variable
 tenant="$1"
 jmx="$2"
-scenario_dir=$working_dir/../../
+scenario_dir=$working_dir/../../jmeter
 local_report_dir=$working_dir/../tmp/report
 report_dir=report
 

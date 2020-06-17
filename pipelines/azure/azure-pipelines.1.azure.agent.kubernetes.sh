@@ -13,7 +13,7 @@ cluster_namespace=jmeter
 kubernetes_version=1.15.10
 node_size=Standard_D2_v2
 node_count=3 #for real test use 5
-test_jmx="docker/selenium_test_chrome_headless.jmx"
+test_jmx="selenium_test_chrome_headless.jmx"
 #devops org details
 devops_org=gstarczewski
 devops_project=jmeter
