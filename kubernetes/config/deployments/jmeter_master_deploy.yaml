@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: jmmaster
-        image: gabrielstar/jmeter_master:latest
+        image: gabrielstar/jmeter-master:latest
         imagePullPolicy: IfNotPresent
         command: [ "/bin/bash", "-c", "--" ]
         args: [ "while true; do sleep 30; done;" ]
