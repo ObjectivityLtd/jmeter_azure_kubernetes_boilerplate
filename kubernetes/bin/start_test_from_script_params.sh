@@ -37,6 +37,7 @@ kubectl exec -ti -n $tenant $master_pod -- /bin/bash /load_test "$test_name -Gwe
 kubectl cp "$tenant/$master_pod:$tmp/$report_dir" "$local_report_dir/"
 kubectl cp "$tenant/$master_pod:$tmp/results.csv" "$working_dir/../tmp/"
 kubectl cp "$tenant/$master_pod:/test/jmeter.log" "$working_dir/../tmp/"
+cat "$working_dir/../tmp/results.csv"
 
 #enter master pod
 # kubectl exec -ti -n jmeter $(kubectl get po -n jmeter | grep jmeter-master | awk '{print $1}') -- bash
