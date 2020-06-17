@@ -79,9 +79,6 @@ cd $HOME/${git_path}/kubernetes/bin && chmod +x *.sh && ./jmeter_cluster_create.
 # Wait for all pods to get deployed
 cd $HOME/${git_path}/pipelines/azure && source bin/wait_for_pods.sh jmeter 1 5 jmeter-master
 
-# Create grafana dashboards
-echo "Creating grafana dashboards"
-cd $HOME/${git_path}/kubernetes/bin && ./dashboard.sh
 
 # Test
 printf "$t"
