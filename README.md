@@ -1,1 +1,3 @@
-cd ~ && rm -Rf jmeter_azure_kubernetes_boilerplate && git clone https://github.com/ObjectivityLtd/jmeter_azure_kubernetes_boilerplate && cd jmeter_azure_kubernetes_boilerplate/pipelines/azure && chmod +x *.sh && ./azure-pipelines.1.azure.agent.kubernetes.sh jmeter-group2
+[Deprecated]
+
+Please use https://github.com/ObjectivityLtd/jmeter_azure_k8_boilerplate instead.
